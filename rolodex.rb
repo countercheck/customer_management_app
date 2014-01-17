@@ -15,9 +15,11 @@ class Rolodex
 
   def find_id(id)
     return nil if @contacts.empty?
-      
+    
+    i=0
     @contacts.each do |contact|
-      return contact if contact.id == id
+      return {object: contact, index: i} if contact.id == id
+      i+=1
     end
   end  
 end
