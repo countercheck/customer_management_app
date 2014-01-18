@@ -7,28 +7,27 @@ class CMS
   end
   
   def main_menu
-    puts "[1] Add a new contact"
-    puts "[2] Find a contact by their ID"
-    puts "[3] Modify a contact"
-    puts "[4] Delete a contact"
-    puts "[3] Filter contacts by attribute"
-    puts "[4] Exit"
-    puts "Enter a number: "
+    selection = 0
+    while selection != 6
+      puts "[1] Add a new contact"
+      puts "[2] Find a contact by their ID"
+      puts "[3] Modify a contact"
+      puts "[4] Delete a contact"
+      puts "[5] Filter contacts by attribute"
+      puts "[6] Exit"
+      puts "Enter a number: "
 
-    selection = gets.chomp.to_i
-    menu_option(selection)
-  end
-  
-  def menu_option(selection)
-    case selection
-    when 1 then @rolodex.new_contact
-    when 2 then find_id
-    when 3 then modify
-    when 4 then delete
-    when 5 then return
+      selection = gets.chomp.to_i
 
+      case selection
+      when 1 then @rolodex.new_contact
+      when 2 then find_id
+      when 3 then modify
+      when 4 then delete
+      when 6 then return
+      else puts "I'm sorry, I didn't understand.  Could you try to make your selection again?"
+      end
     end
-    main_menu
   end
 
   def find_id
@@ -52,13 +51,16 @@ class CMS
     when 2 then @rolodex.modify_age contact
     when 3 then @rolodex.modify_email contact
     when 4 then return
+    else puts "I'm sorry, I didn't understand that."
     end
     
     contact.print
     contact
+
   end
 
   def delete
+
     contact = find_id
     return unless contact
 
