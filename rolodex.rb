@@ -58,4 +58,8 @@ class Rolodex
     contact.email = gets.chomp
     contact
   end
+
+  def delete(contact)
+    @contacts.delete(contact)
+  end
 end

@@ -10,7 +10,7 @@ class CMS
     puts "[1] Add a new contact"
     puts "[2] Find a contact by their ID"
     puts "[3] Modify a contact"
-    puts "[3] Delete a contact"
+    puts "[4] Delete a contact"
     puts "[3] Filter contacts by attribute"
     puts "[4] Exit"
     puts "Enter a number: "
@@ -24,21 +24,22 @@ class CMS
     when 1 then @rolodex.new_contact
     when 2 then find_id
     when 3 then modify
-    when 4 then return
+    when 4 then delete
+    when 5 then return
 
-      
     end
     main_menu
   end
 
   def find_id
     contact = @rolodex.find_id
-    contact.print
+    return unless contact
     contact
   end
 
   def modify
     contact = find_id
+    return unless contact
 
     puts "[1] Modify name"
     puts "[2] Modify age"
@@ -55,6 +56,19 @@ class CMS
     
     contact.print
     contact
+  end
+
+  def delete
+    contact = find_id
+    return unless contact
+
+    puts "Do you really want to delete entry #{contact.id}: #{contact.name}?"
+    puts "Y/N"
+    selection = gets.chomp.upcase
+    return if selection == "N"
+
+    @rolodex.delete contact
+    
   end
 
 end
