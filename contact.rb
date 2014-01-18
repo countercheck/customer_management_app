@@ -14,6 +14,8 @@ class Contact
     puts "Name: #{@name}"
     puts "Age: #{@age}"
     puts "Email: #{@email}"
+    puts "Press any key to continue"
+    gets
   end
 end
 

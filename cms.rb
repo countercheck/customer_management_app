@@ -32,7 +32,6 @@ class CMS
   end
 
   def find_id
-    puts "Enter the ID of the entry."
     contact = @rolodex.find_id
     contact.print
     contact

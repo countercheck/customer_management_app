@@ -20,6 +20,7 @@ class Rolodex
     @contacts << Contact.new(@id, name, age, email)
 
     puts "#{@contacts.last.name} has been added to your rolodex."
+    @contacts.last
   end
 
   def find_id
@@ -28,6 +29,7 @@ class Rolodex
       return nil
     end
 
+    puts "Enter the #ID of contact you wish to find.  If you don't know the #ID, run a search for whatever you do know about them (name, e-mail, age)."
     id = gets.chomp.to_i
     
     i=0
@@ -35,6 +37,8 @@ class Rolodex
       return contact if contact.id == id
       i+=1
     end
+
+    puts "I'm sorry, I couldn't find a contact with that ID.  Maybe searching for the contact's name or e-mail would help?"
   end  
 
   def modify_name(contact)
@@ -43,4 +47,15 @@ class Rolodex
     contact
   end
 
+  def modify_age(contact)
+    puts "Current age is #{contact.age}.  Please enter new age."
+    contact.age = gets.chomp
+    contact
+  end
+
+  def modify_email(contact)
+    puts "Current email is #{contact.email}.  Please enter new e-mail."
+    contact.email = gets.chomp
+    contact
+  end
 end
