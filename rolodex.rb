@@ -28,13 +28,19 @@ class Rolodex
       return nil
     end
 
-    puts "Enter the ID of the entry you wish to view or modify."
     id = gets.chomp.to_i
     
     i=0
     @contacts.each do |contact|
-      return {object: contact, index: i} if contact.id == id
+      return contact if contact.id == id
       i+=1
     end
   end  
+
+  def modify_name(contact)
+    puts "Current name is #{contact.name}.  Please enter new name."
+    contact.name = gets.chomp
+    contact
+  end
+
 end

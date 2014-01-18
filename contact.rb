@@ -9,6 +9,12 @@ class Contact
     @email = email
   end
 
+  def print
+    puts "ID: #{@id}"
+    puts "Name: #{@name}"
+    puts "Age: #{@age}"
+    puts "Email: #{@email}"
+  end
 end
 
 
