@@ -16,8 +16,8 @@ class Rolodex
     @contacts.last
   end
 
-  def modify(contact, method, new_value)
-    contact.send(method, new_value)
+  def modify(contact, field, new_value)
+    contact.send(field, new_value)
     contact
   end
 
@@ -26,20 +26,19 @@ class Rolodex
   end
 
   #returns 0 if contacts.empty?, 1 if contact not found, contact if contact found.
-  def find_id(id)
-    return 0 if @contacts.empty?
-    @contacts.each { |contact|
-      return contact if contact.id == id }
-    return 1
-  end
 
-  def search(attribute, method)
+  def search(value, field)
+   return 0 if @contacts.empty?
     filtered_contacts = []
-    
+    comparison = ( value.class == Fixnum ? :eql? : :include? )
     @contacts.each do |contact|
-      filtered_contacts << contact if contact.send(method).include? attribute
+      if contact.send(field).send(comparison, value)
+        filtered_contacts << contact
+        return filtered_contacts if field == :id
+      end
     end
+    return filtered_contacts unless filtered_contacts.empty?
 
-    filtered_contacts
+    return 1
   end
 end
