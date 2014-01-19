@@ -62,4 +62,27 @@ class Rolodex
   def delete(contact)
     @contacts.delete(contact)
   end
+
+  def search_name
+    puts "Enter all or part of the contact's name"
+    sub_name = gets.chomp.upcase
+    filtered_contacts = []
+    
+    @contacts.each do |contact|
+      filtered_contacts << contact if contact.name.upcase.include? sub_name.upcase
+    end
+
+    case filtered_contacts.length
+    when 0 
+      puts "I couldn't find any matching contacts."
+      return
+    when 1 then return 
+      filtered_contacts[0]
+    else
+      filtered_contacts.sort_by! { |contact| contact.name}
+      return filtered_contacts
+
+    end
+
+  end
 end

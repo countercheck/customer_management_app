@@ -13,7 +13,7 @@ class CMS
       puts "[2] Find a contact by their ID"
       puts "[3] Modify a contact"
       puts "[4] Delete a contact"
-      puts "[5] Filter contacts by attribute"
+      puts "[5] Search contacts by name, age, or e-mail address"
       puts "[6] Exit"
       puts "Enter a number: "
 
@@ -71,6 +71,23 @@ class CMS
 
     @rolodex.delete contact
     
+  end
+
+  def search
+    puts "[1] I want to search contacts by name"
+    puts "[2] I want to search contacts by age"
+    puts "[3] I want to search contacts by name"
+    puts "[4] I came here by mistake, take me back to main menu"
+    selection = gets.chomp.to_i
+
+    case selection
+    when 1 then @rolodex.search_name contact
+    when 2 then @rolodex.search_age contact
+    when 3 then @rolodex.search_email contact
+    when 4 then return
+    else puts "I'm sorry, I didn't understand that."
+    end
+
   end
 
 end
