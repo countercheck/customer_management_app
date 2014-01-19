@@ -35,6 +35,14 @@ class Rolodex
     @contacts.delete(contact)
   end
 
+  #returns 0 if contacts.empty?, 1 if contact not found, contact if contact found.
+  def find_id(id)
+    return 0 if @contacts.empty?
+    @contacts.each { |contact|
+      return contact if contact.id == id }
+    return 1
+  end
+
 
 end
 
