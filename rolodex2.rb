@@ -9,10 +9,10 @@ class Rolodex
     @id = 1000
   end
 
-  #accepts a hash named contact_hash(:name :age :email)
-  def new_contact(contact_hash) 
+  #accepts a hash named contact_info(:name :age :email)
+  def new_contact(contact_info) 
     @id += 1
-    @contacts << Contact.new(@id, contact_hash[:name], contact_hash[:age], contact_hash[:email])
+    @contacts << Contact.new(@id, contact_info)
     @contacts.last
   end
 

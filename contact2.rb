@@ -2,11 +2,11 @@ class Contact
   attr_accessor :name, :age, :email
   attr_reader :id
 
-  def initialize(id, name, age, email)
+  def initialize(id, contact_info)
     @id = id
-    @name = name
-    @age = age
-    @email = email
+    @name = contact_info[:name]
+    @age = contact_info[:age]
+    @email = contact_info[:email]
   end
 
   def print
