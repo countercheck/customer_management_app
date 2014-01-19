@@ -43,7 +43,15 @@ class Rolodex
     return 1
   end
 
+  def search(attribute, method)
+    filtered_contacts = []
+    
+    @contacts.each do |contact|
+      filtered_contacts << contact if contact.send(method).include? attribute
+    end
 
+    filtered_contacts
+  end
 end
 
 contact = {name: "Emilie", age: "29", email: "emmi.ann@gmail.com"}
