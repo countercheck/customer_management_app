@@ -11,7 +11,7 @@ class CMS
     selection = 0
     while selection != 3
       puts "[1] Add a new contact"
-      puts "[2] Find a contact"
+      puts "[2] Search rolodex for an exiting contact"
       puts "[3] Exit \n"
       puts "Enter a number: "
 
@@ -19,7 +19,7 @@ class CMS
 
       case selection
       when 1 then new_contact
-      when 2 then #find a contact
+      when 2 then search_contact
       when 3 then puts "Thanks for trying me out!"
       else puts " \n I'm sorry, I didn't understand.  Could you try to make your selection again?\n"
       end
@@ -28,7 +28,7 @@ class CMS
 
   def new_contact
     contact_info = {}
-    puts "What is your contact's name?"
+    puts "\nWhat is your contact's name?"
     contact_info[:name] = gets.chomp.upcase
 
     puts "\nWhat is your contact's age?"
@@ -37,7 +37,7 @@ class CMS
     puts "\nWhat is your contact's e-mail?"
     contact_info[:email] = gets.chomp.upcase
 
-    puts "\n Any notes about this contact you'd like to add? Press enter if you'd like to skip."
+    puts "\nAny notes about this contact you'd like to add? Press enter if you'd like to skip."
     contact_info[:email] = gets.chomp.upcase
 
     contact = @rolodex.new_contact(contact_info)
@@ -47,6 +47,36 @@ class CMS
 
   end
 
+  def search_contact
+    puts "\n[1] I know the contact's #ID"
+    puts "[2] I know some or all of the contact's name"
+    puts "[0] Return to main menu"
+    puts "Please enter the appropriate number"
+    selection = gets.chomp.to_i
+
+    case selection
+    when 1
+      field = :id
+      puts "\nPlease input the contacts ID like this: 1001"
+    when 2
+      field = :name
+      puts "\nPlease enter part or all of the contact's name"
+    when 0 then return
+    else
+      puts "\nI didn't understand that.  Return to main menu"
+      return
+    end
+
+    value = gets.chomp
+    value = ( field == :id || field == :age ? value.to_i : value.upcase)
+    @selected_contacts = @rolodex.search(field, value)
+  end
+
+
+end
+
+cms = CMS.new
+cms.main_menu
   # def find_id
   #   contact = @rolodex.find_id
   #   return unless contact
@@ -107,7 +137,6 @@ class CMS
 
   # end
 
-end
 
-cms = CMS.new
-cms.main_menu
+
+
