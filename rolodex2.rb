@@ -16,7 +16,7 @@ class Rolodex
     @contacts.last
   end
 
-  def modify(contact, new_value, method)
+  def modify(contact, method, new_value)
     contact.send(method, new_value)
     contact
   end
