@@ -16,18 +16,8 @@ class Rolodex
     @contacts.last
   end
 
-  def modify_name(contact, new_name)
-    contact.name = new_name
-    contact
-  end
-
-  def modify_age(contact, new_age)
-    contact.age = new_age
-    contact
-  end
-
-  def modify_email(contact, new_email)
-    contact.email = new_email
+  def modify(contact, new_value, method)
+    contact.send(method, new_value)
     contact
   end
 
@@ -47,13 +37,9 @@ class Rolodex
     filtered_contacts = []
     
     @contacts.each do |contact|
-      filtered_contacts << contact if contact.send(method).include? attribute
+      filtered_contacts << contact if contact.send(method).include? roattribute
     end
 
     filtered_contacts
   end
 end
-
-contact = {name: "Emilie", age: "29", email: "emmi.ann@gmail.com"}
-rolo = Rolodex.new
-rolo.new_contact(contact)
