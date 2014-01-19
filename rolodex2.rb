@@ -37,7 +37,7 @@ class Rolodex
     filtered_contacts = []
     
     @contacts.each do |contact|
-      filtered_contacts << contact if contact.send(method).include? roattribute
+      filtered_contacts << contact if contact.send(method).include? attribute
     end
 
     filtered_contacts

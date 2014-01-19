@@ -31,15 +31,20 @@ class CMS
     puts "What is your contact's name?"
     contact_info[:name] = gets.chomp.upcase
 
-    puts "What is your contact's age?"
+    puts "\nWhat is your contact's age?"
     contact_info[:age] = gets.chomp
 
-    puts "What is your contact's e-mail"
+    puts "\nWhat is your contact's e-mail?"
+    contact_info[:email] = gets.chomp.upcase
+
+    puts "\n Any notes about this contact you'd like to add? Press enter if you'd like to skip."
     contact_info[:email] = gets.chomp.upcase
 
     contact = @rolodex.new_contact(contact_info)
+    contact.print
 
-    puts "#{contact.name} has been added to your rolodex."
+    puts "\n #{contact.name} has been added to your rolodex.\n"
+
   end
 
   # def find_id
