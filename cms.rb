@@ -161,7 +161,8 @@ class CMS
       case selection
       when 1 then field = :name= 
       when 2 then field = :age=
-      when 3 then field = :email= 
+      when 3 then field = :email=
+      when 4 then field = :notes=
       when 0 then return
       else puts "I'm sorry, I didn't understand that."
       end

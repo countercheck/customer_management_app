@@ -2,8 +2,6 @@ require_relative 'contact'
 
 class Rolodex
 
-  attr_accessor :contacts
-
   def initialize
     @contacts = []
     @filtered_contacts = []
