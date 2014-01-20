@@ -1,5 +1,5 @@
-require_relative 'contact2'
-require_relative 'rolodex2'
+require_relative 'contact'
+require_relative 'rolodex'
 
 class CMS
   attr_accessor :rolodex

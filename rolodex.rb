@@ -1,4 +1,4 @@
-require_relative 'contact2'
+require_relative 'contact'
 
 class Rolodex
 
