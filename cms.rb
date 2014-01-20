@@ -14,6 +14,7 @@ class CMS
       puts "[2] Search rolodex for an existing contact"
       puts "[3] Modify an existing contact"
       puts "[4] Delete an existing contact"
+      puts "[5] Display all contacts"
       puts "[0] Exit \n"
       puts "Enter a number: "
 
@@ -24,6 +25,7 @@ class CMS
       when 2 then search_contact
       when 3 then modify
       when 4 then delete
+      when 5 then display
       when 0 then puts "Thanks for trying me out!"
       else puts " \n I'm sorry, I didn't understand.  Could you try to make your selection again?\n"
       end
@@ -190,6 +192,11 @@ class CMS
     @rolodex.delete contact[0]
 
   end
+
+  def display
+    @rolodex.display(nil)
+  end
+
 end
   
 
