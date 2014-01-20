@@ -8,11 +8,13 @@ class CMS
   end
   
   def main_menu
-    selection = 0
-    while selection != 3
+    selection = 1
+    while selection != 0
       puts "[1] Add a new contact"
       puts "[2] Search rolodex for an existing contact"
-      puts "[3] Exit \n"
+      puts "[3] Modify an existing contact"
+      puts "[4] Delete an existing contact"
+      puts "[0] Exit \n"
       puts "Enter a number: "
 
       selection = gets.chomp.to_i
@@ -20,7 +22,9 @@ class CMS
       case selection
       when 1 then new_contact
       when 2 then search_contact
-      when 3 then puts "Thanks for trying me out!"
+      when 3 then modify
+      when 4 then delete
+      when 0 then puts "Thanks for trying me out!"
       else puts " \n I'm sorry, I didn't understand.  Could you try to make your selection again?\n"
       end
     end
@@ -140,10 +144,53 @@ class CMS
     end
   end
 
+  def modify
+    selection = 1
+    while selection != 0
+      puts "Input the #ID of contact you wish to modify"
+      id = gets.chomp.to_i
+      contact = @rolodex.search(:id, id)
+      contact[0].print
 
+      puts "[1] Modify name"
+      puts "[2] Modify age"
+      puts "[3] Modify e-mail"
+      puts "Choose a number"
+      selection = gets.chomp.to_i
+      
+      case selection
+      when 1 then field = :name= 
+      when 2 then field = :age=
+      when 3 then field = :email= 
+      when 0 then return
+      else puts "I'm sorry, I didn't understand that."
+      end
 
+      puts "Input the new #{field}"
+      value = gets.chomp
+      value = value.to_i if field == :age
+      @rolodex.modify(contact[0], field, value)
+      contact[0].print
+      return
+    end
+  end
 
+  def delete
+    puts "Input the #ID of contact you wish to delete"
+    id = gets.chomp.to_i
+    contact = @rolodex.search(:id, id)
+    contact[0].print
+
+    puts "Do you really want to delete this entry? Y/N"
+      
+    selection = gets.chomp.upcase
+    return if selection == "N"
+
+    @rolodex.delete contact[0]
+
+  end
 end
+  
 
 cms = CMS.new
 cms.main_menu

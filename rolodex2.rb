@@ -33,13 +33,10 @@ class Rolodex
   #returns 0 if contacts.empty?, 1 if contact not found, contact if contact found.
 
   def search(field, value)
-    puts field
-    puts value
     return 0 if @contacts.empty?
 
     @filtered_contacts.clear
     comparison = ( value.class == Fixnum ? :eql? : :include? )
-    puts comparison
 
     @contacts.each do |contact|
       if contact.send(field).send(comparison, value)
@@ -63,13 +60,9 @@ class Rolodex
 
   def display(contact_list)
     contact_list = @contacts if contact_list == nil
-    puts contact_list
 
-    i=1
     contact_list.each do |contact|
-      puts "\n[#{i}]"
       contact.print
-      i += 1
     end
 
     contact_list
