@@ -11,7 +11,7 @@ class CMS
     selection = 0
     while selection != 3
       puts "[1] Add a new contact"
-      puts "[2] Search rolodex for an exiting contact"
+      puts "[2] Search rolodex for an existing contact"
       puts "[3] Exit \n"
       puts "Enter a number: "
 
@@ -38,7 +38,7 @@ class CMS
     contact_info[:email] = gets.chomp.upcase
 
     puts "\nAny notes about this contact you'd like to add? Press enter if you'd like to skip."
-    contact_info[:email] = gets.chomp.upcase
+    contact_info[:notes] = gets.chomp.upcase
 
     contact = @rolodex.new_contact(contact_info)
     contact.print
@@ -50,6 +50,9 @@ class CMS
   def search_contact
     puts "\n[1] I know the contact's #ID"
     puts "[2] I know some or all of the contact's name"
+    puts "[3] I know the contact's age"
+    puts "[4] I know some or all of the contact's e-mail address"
+    puts "[5] I know some or all of the information in the notes section of the contact"
     puts "[0] Return to main menu"
     puts "Please enter the appropriate number"
     selection = gets.chomp.to_i
@@ -60,7 +63,16 @@ class CMS
       puts "\nPlease input the contacts ID like this: 1001"
     when 2
       field = :name
-      puts "\nPlease enter part or all of the contact's name"
+      puts "Please enter part or all of the contact's name"
+    when 3
+      field = :age
+      puts "\nPlease enter the contact's  age"
+    when 4
+      field = :email
+      puts "\nPlease enter part or all of the contact's  e-mail address"
+    when 5
+      field = :notes
+      puts "\nPlease a distinctive word or phrase contained in the contact's notes"
     when 0 then return
     else
       puts "\nI didn't understand that.  Return to main menu"
@@ -70,73 +82,68 @@ class CMS
     value = gets.chomp
     value = ( field == :id || field == :age ? value.to_i : value.upcase)
     @selected_contacts = @rolodex.search(field, value)
+
+    if @selected_contacts == 0
+      puts "Your contact list is empty."
+      return
+    elsif @selected_contacts == 1 
+      puts "I didn't find any matches"
+      return
+    else
+      @rolodex.display(@selected_contacts)
+      selection_menu
+    end
   end
+
+  def selection_menu
+    selection = 1
+    while selection != 0 
+      puts "[1] I want to modify a contact"
+      puts "[2] I want to delete a contact"
+      puts "[3] I want to sort the search results."
+      puts "[4] I want to try a new search."
+      puts "[0] Back to main menu"
+      puts "Please enter a number"
+      
+      selection = gets.chomp.to_i
+      case selection
+      when 1 then modify
+      when 2 then delete
+      when 3 then sort_list
+      when 4 then search_contact
+      when 0 then return  
+      else puts "I didn't understand that" 
+      end
+    end
+  end
+
+  def sort_list
+    selection = 1
+    while selection != 0
+      puts "How would you like the search results sorted?"
+      puts "[1] By name"
+      puts "[2] By age"
+      puts "[3] By e-mail address"
+      puts "[0] Back to previous menu"
+      puts "Enter a number"
+
+      selection = gets.chomp.to_i
+      case selection
+      when 1 then field = :name
+      when 2 then field = :age 
+      when 3 then field = :email
+      when 0 then return
+      end
+
+      @selected_contacts.sort_by!{|contact| @rolodex.read(contact, field)}
+      @rolodex.display(@selected_contacts)
+    end
+  end
+
+
 
 
 end
 
 cms = CMS.new
 cms.main_menu
-  # def find_id
-  #   contact = @rolodex.find_id
-  #   return unless contact
-  #   contact
-  # end
-
-  # def modify
-  #   contact = find_id
-  #   return unless contact
-
-  #   puts "[1] Modify name"
-  #   puts "[2] Modify age"
-  #   puts "[3] Modify e-mail"
-  #   puts "Choose a number"
-  #   selection = gets.chomp.to_i
-
-  #   case selection
-  #   when 1 then @rolodex.modify_name contact
-  #   when 2 then @rolodex.modify_age contact
-  #   when 3 then @rolodex.modify_email contact
-  #   when 4 then return
-  #   else puts "I'm sorry, I didn't understand that."
-  #   end
-    
-  #   contact.print
-  #   contact
-
-  # end
-
-  # def delete
-
-  #   contact = find_id
-  #   return unless contact
-
-  #   puts "Do you really want to delete entry #{contact.id}: #{contact.name}?"
-  #   puts "Y/N"
-  #   selection = gets.chomp.upcase
-  #   return if selection == "N"
-
-  #   @rolodex.delete contact
-    
-  # end
-
-  # def search
-  #   puts "[1] I want to search contacts by name"
-  #   puts "[2] I want to search contacts by age"
-  #   puts "[3] I want to search contacts by name"
-  #   puts "[4] I came here by mistake, take me back to main menu"
-  #   selection = gets.chomp.to_i
-
-  #   case selection
-  #   when 1 then @rolodex.search_name contact
-  #   when 2 then @rolodex.search_age contact
-  #   when 3 then @rolodex.search_email contact
-  #   when 4 then return
-  #   else puts "I'm sorry, I didn't understand that."
-  #   end
-
-  # end
-
-
-
-

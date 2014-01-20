@@ -94,3 +94,8 @@ end
 
 cms = CMS.new
 cms.main_menu
+
+load 'rolodex2.rb'
+contact = {name: "Emilie Brancato", age: 29, email: "emmi.anne@gmail.com"}
+rolo = Rolodex.new
+rolo.new_contact(contact)
