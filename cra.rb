@@ -1,7 +1,7 @@
 require_relative 'contact'
 require_relative 'rolodex'
 
-class CMS
+class CRM
   attr_accessor :rolodex
   def initialize
     @rolodex = Rolodex.new
@@ -200,5 +200,5 @@ class CMS
 end
   
 
-cms = CMS.new
-cms.main_menu
+CRM = CRM.new
+CRM.main_menu
